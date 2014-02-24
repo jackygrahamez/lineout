@@ -24,9 +24,9 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="../../css/index.css" />
-        <title>Hello World</title>
+        <title>Andamans</title>
     </head>
-    <body class="andamans">
+    <body class="andamans trip">
         <div class="wrapper">
             <nav>
                 <li><a href="../../index.html"><button class="menu">Main Menu</button></a></li>
@@ -36,7 +36,7 @@
                     <div class="active"><span>Dry Fly #1</span></div>
                 </li>
             </nav>
-            <svg id="flyline" height="200" width="500"></svg>              
+            <svg id="flyline"></svg>              
             <svg id="fisharea" height="210" width="500">
               <polygon points="0,0 320,0 320,320 0,320" style="stroke:purple;stroke-width:1" />
             </svg>        
@@ -56,6 +56,15 @@
             </ol>
             <button class="continue" value="continue">Continue</button>
         </div>
+        <div class="dialog dialog_locations disabled">
+            <h3>Locations</h3>
+            <ol>
+                <li class="active" value="andamans/DSCF6823.JPG" ratio="0.65790273556231"><span>Location #1</span></li>
+                <li value="andamans/DSCF7099.JPG" ratio="0.585790273556231"><span>Location #2</span></li>
+                <li value="andamans/DSCF7058.JPG" ratio="0.58790273556231"><span>Location #3</span></li>
+                <li value="andamans/DSCF7039.JPG" ratio="0.65790273556231"><span>Location #4</span></li>
+            </ol>
+        </div>        
         <div class="shadow_overlay disabled"></div>        
         <script src="../../js/vendor/jquery-1.10.1.min.js"></script>
         <script type="text/javascript" src="../../phonegap.js"></script>

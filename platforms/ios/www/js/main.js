@@ -1,24 +1,36 @@
+var interval_id = "";
 $(document).ready(function(){
+
 	var hatch = hatachFly();
 	var wHeight = $(window).height();
 	var wWidth = $(window).width();
-	var vPositionRatio = 0.60790273556231;
+	var ratio = $(".dialog_locations li.active").attr("ratio");
+	var vPositionRatio = ratio;
 	var vPosition = vPositionRatio * wHeight;
-	$("#wrapper").css("height", wHeight);
+	$("body").css("height", wHeight);
 	
 	polygonPosition(vPosition, wHeight, wWidth);
 
 	$( window ).resize(function() {
 		var wHeight = $(window).height();
 		var wWidth = $(window).width();
-		var vPositionRatio = 0.60790273556231;
+		var vPositionRatio = ratio;
 		var vPosition = vPositionRatio * wHeight;		
 		polygonPosition(vPosition, wHeight, wWidth);
 	});
-	fishRise(hatch);
+	fishRise(hatch, ratio);
 	castLine();
 	flyBox();
+	menuActivated();
+	move();
 });
+
+function menuActivated() {
+	$(".home nav > li:first").click(function(){
+		console.log("clicked");
+		$(this).parent().toggleClass("expanded");
+	});
+}
 
 function hatachFly() {
 	var hatchArray = [];
@@ -31,12 +43,38 @@ function hatachFly() {
 }
 
 function selectFly() {
-	$("ol li").click(function(){
-		$("ol li").removeClass("active");
+	$(".dialog_fly_box ol li").click(function(){
+		$(".dialog_fly_box ol li.active").removeClass("active");
 		$(this).addClass("active");
 		console.log("text "+$(this).text());
 		$("nav li:last-of-type div span").text($(this).text());
 
+	});
+}
+
+function move() {
+	$(".move").click(function(){
+		$(".dialog_locations").removeClass("disabled");
+		$(".shadow_overlay").removeClass("disabled");
+		$(".dialog_locations ol li").click(function(){
+			$(".dialog_locations ol li").removeClass("active");
+			$(this).addClass("active");
+			var backgroundImg = $(this).attr("value");
+			console.log("backgroundImg "+backgroundImg);
+			document.body.style.backgroundImage="url('../../css/img/"+backgroundImg+"')";
+			//$("body").attr("style", "background: transparent url(img/andamans"+backgroundImg+") no-repeat center center;");
+			$(".dialog_locations").addClass("disabled");
+			$(".shadow_overlay").addClass("disabled");	
+			$("#flyline").replaceWith("<svg id='flyline'></svg>");
+			var hatch = hatachFly();
+			var wHeight = $(window).height();
+			var wWidth = $(window).width();
+			var ratio = $(this).attr("ratio");
+			var vPositionRatio = ratio;
+			var vPosition = vPositionRatio * wHeight;			
+			polygonPosition(vPosition, wHeight, wWidth);
+			castLine();		
+		});
 	});
 }
 
@@ -72,57 +110,64 @@ function castLine() {
 	});
 }
 
-function fishRise(hatch) {
-	setInterval(function(){
-		//Math.floor(Math.random() * 6) + 1
-		if ($("#flyline polyline").length > 0) {
-			var flyX = $("#flyline polyline").attr("points").split(" ")[1].split(",")[0];
-			var flyY = $("#flyline polyline").attr("points").split(" ")[1].split(",")[1];			
-		} else {
-			var flyX = 0;
-			var flyY = 0;
-		}
-		var fishHatch = hatch;
-		var wHeight = $(window).height();
-		var wWidth = $(window).width();
-		var vPositionRatio = 0.60790273556231;
-		var vPosition = vPositionRatio * wHeight;		
-		var fHorizontalPosition = Math.floor(Math.random() * wWidth) + 0 -100;
-		//var fHorizontalPosition = 200;
-		if (fHorizontalPosition < 10) {fHorizontalPosition = 10;}
-		var fVerticalPosition = Math.floor(Math.random() * wHeight);
-		//var fVerticalPosition = 500;
-		if (fVerticalPosition < vPosition) {fVerticalPosition = vPosition + 10;}
-		if (fVerticalPosition > wHeight) {fVerticalPosition = wHeight + -10;}
-		$("div.fish").css("left", fHorizontalPosition+"px");
-		$("div.fish").css("top", fVerticalPosition+"px");
-		console.log("fish "+fHorizontalPosition+", "+fVerticalPosition);
-		$("div.fish").show();
-		//console.log("flyX > fHorizontalPosition "+flyX+" "+fHorizontalPosition);
-		if ((flyX > fHorizontalPosition) && (flyX < fHorizontalPosition + 50)) {
-			console.log("x coordinates match");
-			if ((flyY > fVerticalPosition - vPosition) && (flyY < fVerticalPosition - vPosition + 50)) {
-				console.log("fishHatch "+fishHatch);
-				console.log("active fly "+$(".dialog_fly_box li.active").text());
-				if ($(".dialog_fly_box li.active").text() === fishHatch) {				
-					console.log("y matches");
-					//alert("y matches!");
-					$(".dialog_caught_fish").removeClass("disabled");
-					$("#shadow_overlay").removeClass("disabled");					
-					$(".continue").click(function(){
-							$(".dialog_caught_fish").addClass("disabled");
-							$("#shadow_overlay").addClass("disabled");						
-							$("#flyline").replaceWith("<svg id='flyline'></svg>");
-					});
-				}
-			}
+function fishRise(hatch, ratio) {
+	if ($("body").hasClass("trip")) {
+		if (interval_id != "") {
+			for (var i = 1; i < interval_id; i++)
+	        window.clearInterval(i);						
 		}
 
-		setTimeout(function(){
-			console.log("div.fish hide");
-			$("div.fish").hide();
-		}, 5000);
-	}, 6000);
+		interval_id = setInterval(function(){
+			//Math.floor(Math.random() * 6) + 1
+			if ($("#flyline polyline").length > 0) {
+				var flyX = $("#flyline polyline").attr("points").split(" ")[1].split(",")[0];
+				var flyY = $("#flyline polyline").attr("points").split(" ")[1].split(",")[1];			
+			} else {
+				var flyX = 0;
+				var flyY = 0;
+			}
+			var fishHatch = hatch;
+			var wHeight = $(window).height();
+			var wWidth = $(window).width();
+			var vPositionRatio = ratio;
+			var vPosition = vPositionRatio * wHeight;		
+			var fHorizontalPosition = Math.floor(Math.random() * wWidth) + 0 -100;
+			//var fHorizontalPosition = 200;
+			if (fHorizontalPosition < 10) {fHorizontalPosition = 10;}
+			var fVerticalPosition = Math.floor(Math.random() * wHeight);
+			//var fVerticalPosition = 500;
+			if (fVerticalPosition < vPosition) {fVerticalPosition = vPosition + 10;}
+			if (fVerticalPosition > wHeight) {fVerticalPosition = wHeight + -10;}
+			$("div.fish").css("left", fHorizontalPosition+"px");
+			$("div.fish").css("top", fVerticalPosition+"px");
+			console.log("fish "+fHorizontalPosition+", "+fVerticalPosition);
+			$("div.fish").show();
+			//console.log("flyX > fHorizontalPosition "+flyX+" "+fHorizontalPosition);
+			if ((flyX > fHorizontalPosition) && (flyX < fHorizontalPosition + 50)) {
+				console.log("x coordinates match");
+				if ((flyY > fVerticalPosition - vPosition) && (flyY < fVerticalPosition - vPosition + 50)) {
+					console.log("fishHatch "+fishHatch);
+					console.log("active fly "+$(".dialog_fly_box li.active").text());
+					if ($(".dialog_fly_box li.active").text() === fishHatch) {				
+						console.log("y matches");
+						//alert("y matches!");
+						$(".dialog_caught_fish").removeClass("disabled");
+						$("#shadow_overlay").removeClass("disabled");					
+						$(".continue").click(function(){
+								$(".dialog_caught_fish").addClass("disabled");
+								$("#shadow_overlay").addClass("disabled");						
+								$("#flyline").replaceWith("<svg id='flyline'></svg>");
+						});
+					}
+				}
+			}
+
+			setTimeout(function(){
+				console.log("div.fish hide");
+				$("div.fish").hide();
+			}, 5000);
+		}, 6000);
+	}
 }
 
 function polygonPosition(vPosition, wHeight, wWidth) {
@@ -130,7 +175,7 @@ function polygonPosition(vPosition, wHeight, wWidth) {
 	
 	var polygon = '<svg id="fisharea" height="'+pHeight+'" width="'+wWidth+'"><polygon points="0,0 '+wWidth+',0 '
 	+wWidth+','+wHeight+' 0,'+wHeight
-	+'" style="fill:transparent;stroke:purple;stroke-width:1" /></svg>';
+	+'" style="fill:transparent;" /></svg>';
 	console.log("polygon "+polygon);
 	$("#fisharea").replaceWith(polygon);
 	$("#fisharea").css("top", vPosition);
