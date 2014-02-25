@@ -10,9 +10,9 @@
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
-    <name>HelloWorld</name>
+    <name>LineOut</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        LineOut Fly Fishing Game.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team

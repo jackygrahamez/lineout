@@ -1,6 +1,6 @@
 /Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes.dex : \
 /Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes/mobi/linesocial/lineout/BuildConfig.class \
-/Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes/mobi/linesocial/lineout/HelloWorld.class \
+/Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes/mobi/linesocial/lineout/LineOut.class \
 /Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes/mobi/linesocial/lineout/R$attr.class \
 /Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes/mobi/linesocial/lineout/R$drawable.class \
 /Users/jgs/Projects/phonegap/lineout/platforms/android/bin/classes/mobi/linesocial/lineout/R$string.class \
