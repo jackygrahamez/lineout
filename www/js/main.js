@@ -8,7 +8,9 @@ $(document).ready(function(){
 	var vPositionRatio = ratio;
 	var vPosition = vPositionRatio * wHeight;
 	$("body").css("height", wHeight);
-	
+	$("html").css("height", wHeight+30);
+	$("#flyline").css("height", "400px");
+
 	polygonPosition(vPosition, wHeight, wWidth);
 
 	$( window ).resize(function() {

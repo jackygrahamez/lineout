@@ -38,7 +38,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "screen-iphone-landscape-2x.png",
+      "filename" : "screen-ipad-portrait-2x-2-1.png",
       "scale" : "2x"
     },
     {
@@ -96,7 +96,7 @@
       "orientation" : "landscape",
       "idiom" : "ipad",
       "extent" : "to-status-bar",
-      "filename" : "screen-ipad-landscape-2x-1.png",
+      "filename" : "screen-ipad-portrait-2x-2.png",
       "scale" : "2x"
     }
   ],

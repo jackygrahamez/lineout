@@ -60,6 +60,7 @@ h3, li, a { color: rgb(78, 14, 78);}
 .home nav {
     background: rgba(255, 218, 185, 0.4);    
     margin: 10px;
+    padding-right: 10px;
 }
 .home nav li {
     text-align: left !important;
@@ -95,19 +96,17 @@ h3, li, a { color: rgb(78, 14, 78);}
 }
 .home nav > li:first-of-type:after {
     content: "";
-    display: block;
+    display: inline-block;
     width: 10px;
     height: 0px;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 10px solid rgb(78, 14, 78);
-    position: absolute;
-    right: -15px;
-    top: 18px;
     transition: all 0.5s;
-    -webkit-transition: all 0.5s; /* Safari */        
-    -ms-transform:rotate(0deg); /* IE 9 */
-    -webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */        
+    -webkit-transition: all 0.5s;
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    float: right;     
 }
 .home nav.expanded li:after {
     transition: all 0.5s;
@@ -246,6 +245,25 @@ nav li:last-of-type span {
     /*padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
     margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
+}
+
+@media screen and (min-width : 320px) and (max-width : 650px) {
+    .brown_button, button {
+        padding: 10px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+
+@media screen and (min-width : 651px) {
+    .brown_button, button {
+        padding: 20px 5px 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .home nav li {
+        font-size: 18px;
+    }
 }
 
 /* Landscape layout (with min-width) */
